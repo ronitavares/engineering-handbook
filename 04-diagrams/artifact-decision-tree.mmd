@@ -1,0 +1,12 @@
+flowchart TD
+  A[Nova informação] --> B{Muda produto ou regra de negócio?}
+  B -->|Sim| C[Atualizar PRD]
+  B -->|Não| D{Muda arquitetura ou trade-off permanente?}
+  D -->|Sim| E[Criar ADR]
+  D -->|Não| F{Muda API, evento ou schema?}
+  F -->|Sim| G[Atualizar contrato versionado]
+  F -->|Não| H{Será reutilizada?}
+  H -->|Sim| I[Criar Guideline ou Template]
+  H -->|Não| J{Serve apenas para a feature atual?}
+  J -->|Sim| K[Feature Design ou Execution Plan]
+  J -->|Não| L[Delete]
