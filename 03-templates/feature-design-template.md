@@ -1,245 +1,149 @@
-# Feature Design — <Nome da funcionalidade>
+# Feature Design — <nome>
 
 **Status:** Draft | Review | Approved | Done  
-**Owner:** <Nome / time>  
-**Data:** YYYY-MM-DD  
-**Produto:** <produto>  
-**Links:** PRD, issue, Figma, épico, ADRs relacionados
+**Nível:** Light | Standard | Full | Architecture  
+**Owner:** <time/pessoa>  
+**Links:** PRD | Issue | Figma | ADR | Contratos
 
 ---
 
-## 1. Contexto do problema
+## 1. Business
 
 **Responsável:** Produto
 
-Descreva o problema, motivação e contexto.
+### Problema
 
----
+<qual problema estamos resolvendo?>
 
-## 2. Objetivos
-
-**Responsável:** Produto
-
-- Objetivo 1
-- Objetivo 2
-
-### Métricas esperadas
-
-- Métrica:
-- Baseline:
-- Alvo:
-
----
-
-## 3. Escopo
-
-**Responsável:** Produto + Engenharia
-
-### Incluído
+### Usuários impactados
 
 - 
 
-### Fora do escopo
+### Objetivos
+
+- 
+
+### Escopo
+
+Inclui:
+
+- 
+
+Não inclui:
 
 - 
 
 ---
 
-## 4. Usuários / Personas impactadas
-
-**Responsável:** Produto
-
-| Persona | Impacto |
-|---|---|
-|  |  |
-
----
-
-## 5. UX / Handoff
+## 2. Experience
 
 **Responsável:** Design
 
-Links:
+Preencher apenas se houver impacto de UX.
 
 - Figma:
-- Protótipo:
-- Design system:
-
-### Critérios de UX
-
-- Estados de loading:
-- Estados de erro:
-- Estados vazios:
-- Responsividade:
+- Fluxos:
+- Estados de erro/loading/vazio:
 - Acessibilidade:
 
 ---
 
-## 6. Functional Design
+## 3. Functional Design
 
 **Responsável:** Produto + Engenharia
 
 ### Regras de negócio
 
-1. 
-2. 
-
-### Fluxo principal
-
-1. 
-2. 
-3. 
-
-### Fluxos alternativos
-
 - 
 
-### Estados funcionais
-
-| Estado | Descrição | Transições |
-|---|---|---|
-|  |  |  |
-
-### Permissões / papéis
-
-| Ação | Permissão | Papel |
-|---|---|---|
-|  |  |  |
-
----
-
-## 7. Technical Design
-
-**Responsável:** Arquitetura + Engenharia
-
-### Contextos / módulos impactados
-
-- 
-
-### APIs / contratos
-
-- Endpoint / Evento / Schema:
-- Tipo de mudança: breaking | non-breaking
-- Versionamento:
-
-### Dados / persistência
-
-- Tabelas / coleções:
-- Migrações:
-- Índices:
-
-### Integrações
-
-| Sistema | Direção | Contrato | Observação |
-|---|---|---|---|
-|  |  |  |  |
-
-### Segurança
-
-- Autenticação:
-- Autorização:
-- Dados sensíveis:
-- Auditoria:
-
-### Observabilidade
-
-- Logs:
-- Métricas:
-- Tracing:
-- Alertas:
-
-### Performance / Resiliência
-
-- SLA esperado:
-- Cache:
-- Retry:
-- Idempotência:
-- Degradação:
-
-### Decisões técnicas
-
-| Decisão | Alternativas | Consequência | Precisa de ADR? |
-|---|---|---|---|
-|  |  |  | Sim/Não |
-
----
-
-## 8. Critérios de aceite
-
-**Responsável:** Produto + QA
-
-Use formato Given/When/Then quando útil.
+### Critérios de aceite
 
 - Dado ..., quando ..., então ...
 
----
+### Permissões / papéis
 
-## 9. Estratégia de testes
-
-**Responsável:** QA + Engenharia
-
-- Unitários:
-- Integração:
-- E2E:
-- Contrato:
-- Regressão:
-- Segurança:
+- 
 
 ---
 
-## 10. Estratégia de rollout
-
-**Responsável:** Engenharia + Produto
-
-- Feature flag:
-- Migração:
-- Backward compatibility:
-- Rollback:
-- Monitoramento:
-
----
-
-## 11. Riscos e mitigação
+## 4. Technical Design
 
 **Responsável:** Arquitetura + Engenharia
 
-| Risco | Impacto | Probabilidade | Mitigação |
-|---|---|---|---|
-|  |  |  |  |
+Preencher apenas o que for relevante.
+
+| Área | Decisão / impacto |
+|---|---|
+| Arquitetura |  |
+| Dados |  |
+| API / Eventos / Schemas |  |
+| Integrações |  |
+| Segurança |  |
+| Observabilidade |  |
+| Performance / Resiliência |  |
+| Migração / Compatibilidade |  |
+
+### Decisões que podem exigir ADR
+
+| Decisão | Por que importa | ADR? |
+|---|---|---|
+|  |  | Sim/Não |
 
 ---
 
-## 12. Execution Plan
+## 5. Delivery
 
-**Responsável:** Engenharia
+**Responsável:** Engenharia + QA
 
-| Ordem | Tarefa | Validação | Dependência |
-|---|---|---|---|
-| 1 |  |  |  |
+### Testes
+
+- Unit:
+- Integration:
+- E2E:
+- Contract:
+
+### Rollout
+
+- Feature flag:
+- Rollback:
+- Monitoramento:
+
+### Execution Plan
+
+| Ordem | Tarefa | Validação |
+|---|---|---|
+| 1 |  |  |
 
 ---
 
-## 13. Knowledge Consolidation
+## 6. Risks
 
 **Responsável:** Engenharia + Arquitetura
 
-Após implementação:
-
-- [ ] Feature Design pode ser removida.
-- [ ] ADR criado, se necessário.
-- [ ] Guidelines atualizadas, se necessário.
-- [ ] PRD atualizado, se necessário.
-- [ ] Contratos atualizados, se necessário.
-- [ ] Artefatos transitórios removidos.
+| Risco | Mitigação |
+|---|---|
+|  |  |
 
 ---
 
-## 14. Aprovações
+## 7. Knowledge Consolidation
 
-| Área | Responsável | Status | Data |
-|---|---|---|---|
-| Produto |  | Pending |  |
-| Design |  | Pending |  |
-| Engenharia |  | Pending |  |
-| Arquitetura |  | Pending |  |
-| QA |  | Pending |  |
+**Responsável:** Engenharia + Arquitetura
+
+- [ ] ADR criado, se necessário.
+- [ ] Guideline/template atualizado, se necessário.
+- [ ] PRD atualizado, se necessário.
+- [ ] Contratos atualizados, se necessário.
+- [ ] Feature Design pode ser deletada após merge.
+
+---
+
+## 8. Aprovações
+
+| Área | Responsável | Status |
+|---|---|---|
+| Produto |  | Pending |
+| Design |  | N/A |
+| Engenharia |  | Pending |
+| Arquitetura |  | N/A |
+| QA |  | Pending |
