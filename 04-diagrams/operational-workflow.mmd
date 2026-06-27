@@ -1,0 +1,15 @@
+flowchart LR
+  A[Discovery] --> B[Feature Design]
+  B --> C[Planning]
+  C --> D[Implementation]
+  D --> E[Validation]
+  E --> F[Knowledge Consolidation]
+
+  B --> B1[Functional Design]
+  B --> B2[Technical Design]
+
+  F --> G{Knowledge remains?}
+  G -->|Decision| H[ADR]
+  G -->|Pattern| I[Guideline]
+  G -->|Product change| J[PRD Update]
+  G -->|No durable value| K[Discard]
