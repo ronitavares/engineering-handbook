@@ -1,0 +1,13 @@
+flowchart TD
+  A[Artifact Created] --> B{Has durable value?}
+  B -->|Yes| C{Type of value?}
+  B -->|No| D[Discard after use]
+
+  C -->|Implementation| E[Code]
+  C -->|Behavior| F[Tests]
+  C -->|Architecture Decision| G[ADR]
+  C -->|Reusable Practice| H[Guideline]
+  C -->|Product Knowledge| I[PRD]
+  C -->|Contract| J[OpenAPI / AsyncAPI / Schema]
+
+  D --> K[Feature Design / Plan / Prompt / Scratchpad]
