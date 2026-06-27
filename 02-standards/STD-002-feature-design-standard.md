@@ -1,7 +1,7 @@
 # STD-002 — Feature Design Standard (FDS)
 
 **Status:** Proposed  
-**Versão:** 1.0  
+**Versão:** 2.0  
 **Owner:** Produto + Engenharia + Arquitetura  
 **Tipo:** Standard
 
@@ -9,215 +9,158 @@
 
 ## 1. Objetivo
 
-Definir a estrutura oficial da **Feature Design**, o principal artefato colaborativo usado durante o desenvolvimento de funcionalidades.
+Definir a **Feature Design** como um canvas colaborativo e transitório para reduzir incerteza antes da implementação.
 
-A Feature Design combina dois níveis de design no mesmo artefato:
+A Feature Design combina:
 
-1. **Functional Design** — o que será construído, por quê, para quem e com quais critérios.
-2. **Technical Design** — como a solução será integrada ao sistema, quais decisões técnicas existem e quais impactos devem ser tratados.
-
----
-
-## 2. Natureza do artefato
-
-A Feature Design é um artefato **transitório**.
-
-Ela vive durante o desenvolvimento da feature e deve ser removida após a entrega, salvo quando algum conhecimento for promovido para ADR, Guideline, PRD ou contrato público.
+- **Functional Design**: problema, objetivo, escopo, regras, UX e critérios.
+- **Technical Design**: arquitetura, dados, contratos, segurança, testes e rollout.
+- **Knowledge Decisions**: o que deve virar ADR, Guideline, PRD, contrato ou ser deletado.
 
 ---
 
-## 3. O que a Feature Design deve fazer
+## 2. Natureza
 
-Ela deve reduzir incerteza antes da implementação.
+Feature Design não é documentação permanente.
 
-Deve responder:
-
-- qual problema estamos resolvendo;
-- qual resultado esperado;
-- qual escopo;
-- quais regras de negócio;
-- quais critérios de aceite;
-- quais fluxos de UX são relevantes;
-- quais decisões técnicas importam;
-- quais integrações/contratos serão afetados;
-- quais riscos existem;
-- como validar e fazer rollout.
+Ela existe enquanto a feature está sendo construída. Após merge, deve ser removida ou ter partes promovidas.
 
 ---
 
-## 4. O que a Feature Design não deve fazer
+## 3. Canvas oficial
 
-Não deve descrever detalhes inferíveis pelo código.
+```text
+FEATURE DESIGN CANVAS
 
-Evitar:
+Business
+  Problem | Users | Goals | Scope | Non-goals | Acceptance
 
-- sequência Controller → Service → Repository;
-- nomes de classes que ainda podem mudar;
-- pseudo-código equivalente à implementação;
-- cópia de endpoints já descritos em OpenAPI;
-- documentação de fluxo interno de métodos;
-- diagramas sincronizados manualmente com código.
+Experience
+  UX flows | States | Errors | Accessibility | Handoff
 
----
+Engineering
+  Architecture | Data | Contracts | Security | Observability | Risks
 
-## 5. Responsabilidades por seção
+Delivery
+  Tests | Rollout | Migration | Dependencies | Execution Plan
 
-| Seção | Responsável primário | Participantes |
-|---|---|---|
-| Contexto do problema | Produto | Engenharia, Design |
-| Objetivos | Produto | Engenharia |
-| Escopo e fora do escopo | Produto | Engenharia, Arquitetura |
-| UX / Fluxos | Design | Produto, Engenharia |
-| Critérios de aceite | Produto + QA | Engenharia |
-| Functional Design | Produto + Engenharia | QA, Design |
-| Technical Design | Arquitetura + Engenharia | IA |
-| Estratégia de testes | QA + Engenharia | IA |
-| Rollout | Engenharia | Produto, Operações |
-| Riscos | Arquitetura + Engenharia | Produto, QA |
-| Knowledge Consolidation | Engenharia | Arquitetura, Produto |
-
-Ninguém é dono isolado da Feature Design inteira. Cada disciplina é dona da sua parte.
-
----
-
-## 6. Estrutura oficial
-
-Uma Feature Design deve conter:
-
-1. Metadados.
-2. Contexto.
-3. Objetivos.
-4. Não objetivos.
-5. Escopo.
-6. Personas/usuários impactados.
-7. UX / Handoff.
-8. Functional Design.
-9. Technical Design.
-10. Critérios de aceite.
-11. Estratégia de testes.
-12. Estratégia de rollout.
-13. Riscos e mitigação.
-14. Plano de execução.
-15. Knowledge Consolidation.
-16. Aprovações.
+Knowledge
+  ADR? | Guideline? | PRD update? | Contract update? | Delete?
+```
 
 O template oficial está em [`feature-design-template.md`](../03-templates/feature-design-template.md).
 
 ---
 
-## 7. Functional Design
+## 4. Responsáveis por seção
 
-### Deve conter
-
-- Regras de negócio.
-- Estados funcionais relevantes.
-- Permissões e papéis quando aplicável.
-- Fluxos principais.
-- Fluxos alternativos.
-- Mensagens, erros e exceções relevantes.
-- Critérios de aceite em linguagem verificável.
-
-### Não deve conter
-
-- Implementação interna.
-- Estrutura de banco.
-- Classes e métodos.
-- Detalhes de framework.
+| Bloco | Responsável primário | Participantes |
+|---|---|---|
+| Business | Produto | Engenharia, Design |
+| Experience | Design | Produto, Engenharia |
+| Engineering | Arquitetura + Engenharia | IA |
+| Delivery | Engenharia + QA | Produto, Operações |
+| Knowledge | Engenharia + Arquitetura | Produto, QA |
 
 ---
 
-## 8. Technical Design
+## 5. Níveis de profundidade
 
-### Deve conter, quando aplicável
-
-- Contextos/domínios afetados.
-- Contratos de API/eventos.
-- Mudanças em banco de dados.
-- Integrações externas.
-- Decisões arquiteturais.
-- Segurança.
-- Observabilidade.
-- Performance.
-- Resiliência.
-- Compatibilidade e versionamento.
-- Estratégia de migração.
-
-### Não deve conter
-
-- Pseudo-código extenso.
-- Descrição de serviços triviais.
-- Duplicação do código esperado.
-- Listagem mecânica de arquivos a alterar, salvo no plano de execução.
+| Nível | Quando usar | O que preencher |
+|---|---|---|
+| Light | Bug, ajuste pequeno, baixa incerteza | Objetivo, escopo, aceites e validação |
+| Standard | Feature média ou integração simples | Canvas completo, mas objetivo |
+| Full | Feature grande, alto risco ou múltiplos times | Canvas completo + rollout + riscos + ADR provável |
+| Architecture | Mudança estrutural | Technical Design completo + ADR obrigatório |
 
 ---
 
-## 9. Nível de profundidade
+## 6. Quando criar Feature Design
 
-A profundidade deve ser proporcional à complexidade.
+Criar quando houver pelo menos um item:
 
-| Complexidade | Expectativa |
+- mais de uma interpretação possível;
+- regra de negócio nova;
+- impacto em contrato;
+- impacto em UX;
+- risco técnico;
+- integração externa;
+- mudança em dados;
+- necessidade de alinhamento entre áreas;
+- agente de IA precisará de contexto estruturado.
+
+Não criar para bugs triviais ou mudanças totalmente localizadas com teste claro.
+
+---
+
+## 7. Quando omitir seções
+
+| Seção | Pode omitir quando |
 |---|---|
-| Pequena | Functional Design curto, Technical Design mínimo. |
-| Média | Functional Design completo e Technical Design objetivo. |
-| Grande | Functional + Technical completos, riscos, rollout e validação detalhados. |
-| Arquitetural | Technical Design completo e provável ADR. |
+| UX | Não há impacto de experiência. |
+| Technical Design | Mudança é local e inferível pelo código. |
+| Rollout | Sem feature flag, migração ou risco operacional. |
+| Data | Não muda persistência. |
+| Contracts | Não muda API/evento/schema. |
+| Risks | Risco é baixo e explícito. |
+
+Omitir é aceitável. Deixar seção vazia sem justificativa não é.
 
 ---
 
-## 10. Critérios de qualidade
+## 8. O que não deve entrar
 
-Uma boa Feature Design é:
+Evitar:
 
-- clara;
-- verificável;
-- objetiva;
-- de alta densidade;
-- útil para humanos e IA;
-- sem duplicação da implementação;
-- rastreável até critérios de aceite;
-- descartável após a entrega.
-
----
-
-## 11. Sinais de problema
-
-A Feature Design deve ser revisada se:
-
-- parece um tutorial de código;
-- copia endpoints ou DTOs inteiros sem necessidade;
-- não deixa claro o objetivo da feature;
-- não possui critérios de aceite;
-- não identifica responsáveis;
-- não define riscos;
-- não pode ser usada por QA para validar;
-- não pode ser usada por Engenharia para planejar.
+- sequência Controller → Service → Repository;
+- pseudo-código extenso;
+- nomes de classes ainda instáveis;
+- documentação duplicada da OpenAPI;
+- diagramas que precisam acompanhar cada refactor;
+- logs de conversa com IA;
+- plano detalhado demais para tarefas triviais.
 
 ---
 
-## 12. Aprovação
+## 9. Critérios de qualidade
 
-A aprovação mínima depende da complexidade:
+Uma boa Feature Design:
 
-| Tipo | Aprovação mínima |
-|---|---|
-| Pequena | Engenharia |
-| Média | Produto + Engenharia |
-| Grande | Produto + Engenharia + Arquitetura + QA |
-| Arquitetural | Arquitetura + Engenharia |
-| Regulatória | Produto + Jurídico/Compliance + Engenharia |
+- reduz incerteza;
+- define responsáveis;
+- possui critérios verificáveis;
+- tem densidade alta;
+- é proporcional à complexidade;
+- é útil para IA sem virar fonte permanente;
+- facilita planejamento e validação;
+- é deletável após a entrega.
 
 ---
 
-## 13. Encerramento
+## 10. Feature Design como contexto para IA
 
-Ao final da feature, a Feature Design deve passar pela Knowledge Consolidation.
+A Feature Design deve ser escrita para humanos e agentes.
 
-Possíveis destinos:
+Boas práticas:
 
-- remover;
-- extrair ADR;
-- atualizar Guideline;
-- atualizar PRD;
-- atualizar contrato.
+- frases curtas;
+- decisões explícitas;
+- constraints visíveis;
+- links para fontes oficiais;
+- evitar ambiguidade;
+- separar fatos de hipóteses;
+- destacar validação esperada.
 
-A Feature Design não deve permanecer como documentação permanente da implementação.
+---
+
+## 11. Encerramento
+
+Antes do merge, responder:
+
+1. Alguma decisão virou ADR?
+2. Algum padrão virou Guideline?
+3. Alguma regra atualizou PRD?
+4. Algum contrato mudou?
+5. A Feature Design pode ser deletada?
+
+A resposta padrão esperada é: **deletar**.

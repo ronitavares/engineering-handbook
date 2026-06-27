@@ -1,7 +1,7 @@
 # STD-001 — Engineering Knowledge Standard (EKS)
 
 **Status:** Proposed  
-**Versão:** 1.0  
+**Versão:** 2.0  
 **Owner:** Engenharia / Arquitetura  
 **Tipo:** Standard
 
@@ -9,265 +9,211 @@
 
 ## 1. Objetivo
 
-Definir como o conhecimento de engenharia deve ser criado, classificado, armazenado, promovido e descartado.
+Definir como **Knowledge Assets** são criados, classificados, consumidos, promovidos e removidos.
 
-O EKS responde:
-
-> Como a organização governa conhecimento técnico e organizacional?
-
-Ele não define como implementar features. Essa responsabilidade é do workflow operacional.
+O EKS não governa documentação. Ele governa conhecimento.
 
 ---
 
-## 2. Premissa central
+## 2. Knowledge Asset
 
-> Documentação não é o objetivo. Conhecimento útil é o objetivo.
+Um **Knowledge Asset** é qualquer artefato que carrega conhecimento útil para executar, validar, operar ou evoluir software.
 
-Todo artefato deve aumentar a capacidade de humanos e agentes de IA compreenderem, decidirem ou evoluírem o sistema.
+Todo Knowledge Asset deve ter:
+
+| Campo | Obrigatório? | Descrição |
+|---|---:|---|
+| Owner | Sim | Pessoa ou time responsável. |
+| Purpose | Sim | Por que existe. |
+| Source of truth | Sim | Qual conhecimento governa. |
+| Consumers | Sim | Quem usa: pessoas, IA, QA, produto, operação. |
+| Lifecycle | Sim | Permanente, transitório ou descartável. |
+| Promotion rule | Sim | Quando vira ADR, Guideline, PRD, contrato ou template. |
+| Deletion rule | Sim | Quando deve ser removido. |
 
 ---
 
 ## 3. Fontes oficiais de verdade
 
-| Tipo de conhecimento | Fonte oficial |
+| Conhecimento | Fonte oficial |
 |---|---|
 | Implementação | Código |
 | Comportamento esperado | Testes |
 | Produto | PRD |
 | Arquitetura | ADR |
 | Convenções | Guidelines |
-| Contratos públicos | OpenAPI, AsyncAPI, schemas ou documentos equivalentes |
-| Definição temporária de feature | Feature Design |
+| Contratos públicos | OpenAPI, AsyncAPI, schemas ou equivalente |
+| Contexto ativo de feature | Feature Design |
 | Planejamento temporário | Execution Plan |
 
-Nenhum conhecimento deve ter duas fontes oficiais.
+Nenhum conhecimento deve ter duas fontes oficiais concorrentes.
 
 ---
 
-## 4. Categorias de conhecimento
+## 4. Categorias
 
-### 4.1 Conhecimento permanente
+### 4.1 Durable Knowledge Assets
 
-Conhecimento durável, confiável e útil por longo prazo.
-
-Exemplos:
-
-- código;
-- testes;
-- ADRs;
-- guidelines;
-- contratos públicos;
-- templates reutilizáveis;
-- scripts de migração;
-- infraestrutura como código.
-
-Deve permanecer no repositório.
-
-### 4.2 Conhecimento de produto
-
-Conhecimento de negócio, objetivos, escopo e regras funcionais.
-
-Exemplos:
-
-- PRD;
-- roadmap;
-- personas;
-- fluxos de produto;
-- métricas;
-- decisões de escopo.
-
-Preferencialmente fica fora do repositório, em ferramenta de produto ou wiki corporativa.
-
-### 4.3 Conhecimento transitório
-
-Conhecimento útil apenas durante o desenvolvimento.
-
-Exemplos:
-
-- Feature Design;
-- Execution Plan;
-- checklists temporários;
-- diagramas temporários;
-- prompts;
-- conversas com IA;
-- scratchpads;
-- notas de trabalho.
-
-Deve ser removido após a entrega, salvo se promovido.
-
----
-
-## 5. Política do repositório
-
-### Permitido
+Permanecem no repositório.
 
 - Código.
 - Testes.
-- ADRs.
+- ADR.
 - Guidelines.
 - Contratos públicos.
 - Templates reutilizáveis.
-- Documentação operacional estável.
-- Diagramas de arquitetura estáveis.
+- IaC.
+- Scripts de migração.
 
-### Não permitido como conteúdo permanente
+### 4.2 Product Knowledge Assets
 
-- Feature Design concluída.
-- Execution Plan concluído.
-- Brainstorms.
-- RFCs em discussão encerradas.
-- Prompts e conversas com IA.
-- Scratchpads.
-- Diagramas temporários.
-- Documentação que apenas reproduz o código.
+Vivem preferencialmente fora do repositório.
 
----
+- PRD.
+- Roadmap.
+- Personas.
+- UX handoff.
+- Métricas.
+- Pesquisa de produto.
 
-## 6. Densidade de conhecimento
+### 4.3 Workspace Knowledge Assets
 
-Um artefato deve maximizar:
-
-```text
-Conhecimento novo / esforço de leitura
-```
-
-Artefatos de alta densidade:
-
-- explicam decisões;
-- documentam trade-offs;
-- reduzem ambiguidade;
-- registram restrições relevantes;
-- orientam evolução futura.
-
-Artefatos de baixa densidade:
-
-- descrevem controllers;
-- repetem o código;
-- listam chamadas internas;
-- copiam APIs já descritas em contratos;
-- envelhecem rapidamente.
-
-Artefatos de baixa densidade devem ser removidos ou reescritos.
-
----
-
-## 7. Knowledge Consolidation
-
-A Knowledge Consolidation é obrigatória antes de uma feature ser considerada concluída.
-
-Ela responde:
-
-> O que deste trabalho deve permanecer como conhecimento organizacional?
-
-### 7.1 Destinos possíveis
-
-| Destino | Quando usar |
-|---|---|
-| Descartar | Quando o artefato só serviu para execução. |
-| Promover para ADR | Quando houve decisão arquitetural permanente. |
-| Promover para Guideline | Quando surgiu prática reutilizável. |
-| Atualizar PRD | Quando houve mudança funcional ou de escopo. |
-| Atualizar contrato | Quando API, evento ou schema mudou. |
-| Manter como template | Quando o artefato virou modelo reutilizável. |
-
-### 7.2 Artefatos normalmente descartados
+Existem durante a entrega.
 
 - Feature Design.
 - Execution Plan.
-- Prompts.
+- Checklist temporário.
+- Diagrama exploratório.
+- RFC em discussão.
+
+Devem ser removidos após merge, salvo promoção explícita.
+
+### 4.4 Knowledge Exhaust
+
+Resíduo sem valor durável.
+
+- Prompts soltos.
+- Conversas com IA.
 - Scratchpads.
-- Diagramas exploratórios.
-- Checklists temporários.
+- Notas pessoais.
+- Tentativas abandonadas.
 
-### 7.3 Artefatos normalmente promovidos
-
-- Decisões permanentes → ADR.
-- Padrões repetíveis → Guideline.
-- Mudanças de produto → PRD.
-- Contratos versionados → OpenAPI / AsyncAPI / schema.
+Devem ser descartados.
 
 ---
 
-## 8. ADRs
+## 5. Knowledge Debt
 
-ADRs registram decisões arquiteturais permanentes.
-
-Um ADR deve conter:
-
-- contexto;
-- decisão;
-- alternativas consideradas;
-- consequências;
-- status;
-- data;
-- responsáveis.
-
-ADRs são históricos. Não devem ser editados para representar estado novo, exceto correções editoriais. Mudança de decisão deve gerar novo ADR.
-
----
-
-## 9. Guidelines
-
-Guidelines registram convenções aplicáveis a múltiplas features.
-
-Devem ser:
-
-- objetivas;
-- prescritivas;
-- testáveis quando possível;
-- úteis para humanos e agentes de IA.
-
-Guidelines não devem virar tutorial extenso nem replicar documentação pública de frameworks.
-
----
-
-## 10. Contratos públicos
-
-Contratos são fontes de verdade para integrações.
+Knowledge Debt é a dívida gerada quando o conhecimento necessário para operar ou evoluir o sistema não está registrado na fonte correta.
 
 Exemplos:
 
-- OpenAPI;
-- AsyncAPI;
-- JSON Schema;
-- Protobuf;
-- tabelas de eventos versionados;
-- contratos SQS/Kafka.
+| Dívida | Correção |
+|---|---|
+| Decisão arquitetural em chat | Criar ADR |
+| Regra crítica sem teste | Criar teste |
+| API alterada sem contrato | Atualizar contrato |
+| Padrão repetido sem guideline | Criar guideline |
+| Feature Design antiga no repo | Remover |
+| PRD divergente | Atualizar PRD |
+| Contexto duplicado | Eleger fonte única |
 
-Mudanças de contrato devem seguir política de versionamento.
-
----
-
-## 11. Critérios para criar artefato
-
-Antes de criar um artefato, responder:
-
-1. O código já responde isso?
-2. Os testes já cobrem esse comportamento?
-3. Esse conhecimento continuará útil em seis meses?
-4. Este artefato reduz ambiguidade real?
-5. Este artefato representa decisão, restrição ou contrato?
-6. Um agente de IA se beneficiará desta informação sem ser confundido por drift?
-
-Se a maioria das respostas for negativa, o artefato não deve ser criado.
+Knowledge Debt deve ser tratada como dívida técnica.
 
 ---
 
-## 12. Critérios para remover artefato
+## 6. Artifact Decision Tree
 
-Remover quando:
-
-- a feature foi entregue;
-- o artefato descreve implementação já inferível pelo código;
-- o conteúdo está divergente;
-- o artefato não tem owner;
-- o artefato não possui ciclo de vida claro;
-- o conhecimento relevante já foi promovido.
+```text
+Tenho uma informação nova
+  ├─ É comportamento implementado? → Código + Testes
+  ├─ É regra de produto? → PRD
+  ├─ É decisão arquitetural? → ADR
+  ├─ É contrato de integração? → OpenAPI / AsyncAPI / Schema
+  ├─ É padrão reutilizável? → Guideline / Template
+  ├─ Só serve para esta entrega? → Feature Design / Execution Plan
+  └─ Não terá valor depois? → Delete
+```
 
 ---
 
-## 13. Regra de ouro
+## 7. Política do repositório
 
-> O repositório deve conter apenas conhecimento durável, de alta densidade e não inferível de forma confiável pelo código.
+O repositório deve conter conhecimento durável e de alta densidade.
 
-Tudo que não atende esse critério é transitório.
+### Permitido
+
+- Código e testes.
+- ADRs.
+- Guidelines.
+- Contratos.
+- Templates.
+- Diagramas estáveis.
+- Documentação operacional estável.
+
+### Não permitido como permanente
+
+- Feature Design encerrada.
+- Execution Plan encerrado.
+- Prompts.
+- Conversas com IA.
+- Scratchpads.
+- Diagramas temporários.
+- Documentação que replica implementação.
+
+---
+
+## 8. Knowledge Consolidation
+
+Obrigatória antes do merge.
+
+Perguntas:
+
+1. Alguma decisão precisa virar ADR?
+2. Algum padrão precisa virar Guideline?
+3. Alguma regra de produto precisa atualizar PRD?
+4. Algum contrato mudou?
+5. Algum template reutilizável surgiu?
+6. Quais artefatos devem ser removidos?
+
+Resultado esperado:
+
+- conhecimento permanente promovido;
+- conhecimento transitório removido;
+- fonte de verdade atualizada;
+- nenhuma decisão relevante perdida em chat/prompt.
+
+---
+
+## 9. AI Readability
+
+Todo Knowledge Asset permanente deve ser legível por agentes de IA.
+
+Isso exige:
+
+- títulos explícitos;
+- owner claro;
+- escopo declarado;
+- linguagem objetiva;
+- ausência de duplicação;
+- links para fontes oficiais;
+- decisão ou regra facilmente extraível.
+
+---
+
+## 10. Maturity indicators
+
+Um time está evoluindo quando:
+
+- reduz specs antigas no repositório;
+- aumenta cobertura de testes para regras críticas;
+- cria ADRs apenas para decisões permanentes;
+- mantém guidelines curtas e acionáveis;
+- remove artefatos transitórios regularmente;
+- agentes de IA usam contexto correto com menos correção humana.
+
+---
+
+## 11. Regra de ouro
+
+> Se o artefato não é durável, não é fonte oficial e não reduz ambiguidade futura, ele deve ser removido.
