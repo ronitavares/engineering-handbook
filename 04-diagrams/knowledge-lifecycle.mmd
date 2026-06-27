@@ -1,0 +1,18 @@
+flowchart TD
+  A[Knowledge Created] --> B{Category}
+  B --> C[Permanent Knowledge]
+  B --> D[Product Knowledge]
+  B --> E[Temporary Knowledge]
+  B --> F[Knowledge Exhaust]
+
+  C --> C1[Keep in Repository]
+  D --> D1[Keep in Product Tool]
+  E --> E1[Use During Feature]
+  F --> F1[Discard]
+
+  E1 --> G[Knowledge Consolidation]
+  G --> H{Promote?}
+  H -->|ADR| I[Architecture Decision]
+  H -->|Guideline| J[Reusable Practice]
+  H -->|PRD| K[Product Update]
+  H -->|No| L[Delete]
