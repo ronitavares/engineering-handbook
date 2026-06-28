@@ -8,24 +8,43 @@ A decisão central é simples:
 
 ---
 
-## O que mudou na v2
+## Estrutura conceitual
 
-A v2 simplifica o handbook e muda o foco de “documentos” para **decisões de engenharia, contexto e ciclo de vida do conhecimento**.
+O handbook passa a ser organizado em três camadas:
 
-Principais mudanças:
+```text
+AI Engineering Handbook
+│
+├── Framework
+│   ├── Principles
+│   ├── Context Engineering
+│   ├── Knowledge Assets
+│   ├── Workflow
+│   └── Standards
+│
+├── Engineering References
+│   ├── Backend
+│   ├── Platform
+│   ├── Testing
+│   ├── CI/CD
+│   ├── Security
+│   └── AI-assisted Remediation
+│
+└── Templates
+    ├── Feature Design
+    ├── Execution Plan
+    ├── ADR
+    ├── Guideline
+    └── Knowledge Consolidation
+```
 
-- Menos documentos normativos.
-- Mais matrizes, fluxos e diagramas.
-- IA tratada como participante transversal do workflow.
-- Novo conceito central: **Knowledge Assets**.
-- Novo tema: **Context Engineering**.
-- Feature Design mais enxuta e proporcional à complexidade.
-- Workflow adaptativo para evitar burocracia.
-- Artifact Decision Tree para decidir o destino de qualquer informação.
+A camada **Framework** responde “como pensamos”.  
+A camada **Engineering References** responde “como fazemos em uma stack específica”.  
+A camada **Templates** fornece artefatos operacionais reutilizáveis.
 
 ---
 
-## Estrutura recomendada
+## Estrutura do repositório
 
 ```text
 engineering-handbook/
@@ -50,10 +69,18 @@ engineering-handbook/
 │   ├── artifact-lifecycle.mmd
 │   ├── artifact-decision-tree.mmd
 │   └── responsibility-matrix.mmd
+├── 05-reference/
+│   └── backend/
+│       ├── README.md
+│       ├── nx-bounded-context-monorepo.md
+│       ├── validation-gates.md
+│       ├── testing-strategy.md
+│       ├── ci-cd-release.md
+│       ├── governance-security-observability.md
+│       ├── documentation-knowledge.md
+│       └── ai-assisted-remediation.md
 └── glossary.md
 ```
-
-> Os documentos `RFC-002`, `RFC-003` e `RFC-004` da v1 podem ser mantidos temporariamente como histórico, mas o conteúdo normativo passa a ser consolidado na `RFC-001`.
 
 ---
 
@@ -66,6 +93,7 @@ engineering-handbook/
 | [STD-001 — Engineering Knowledge Standard](./02-standards/STD-001-engineering-knowledge-standard.md) | Governança de Knowledge Assets, ciclo de vida e política do repositório. |
 | [STD-002 — Feature Design Standard](./02-standards/STD-002-feature-design-standard.md) | Padrão da Feature Design, com Functional Design e Technical Design proporcionais à complexidade. |
 | [Context Engineering](./context-engineering.md) | Como montar, priorizar e reduzir contexto para agentes de IA. |
+| [Backend Reference](./05-reference/backend/README.md) | Referência operacional para Nx + NestJS + TypeORM em monorepo orientado por bounded contexts. |
 
 ---
 
